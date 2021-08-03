@@ -46,8 +46,13 @@ btnClick.addEventListener("click", function() {
 
         countGuessAttempt++;
         resultHistories += "<li>" + inputTextNumConvert + "</li>";
+
+
+
         document.getElementById("guessingNumber").value = "";
     }
 
     showHisoriesList.innerHTML = resultHistories;
+
+   //  Testing
 });
