@@ -9,45 +9,45 @@ let result = document.getElementById("result");
 let resultHistories = "<ul>";
 let showHisoriesList = document.getElementById("show-pre-inputs");
 
-btnClick.addEventListener("click", function () {
+btnClick.addEventListener("click", function() {
 
-   if (countGuessAttempt >= 6) {    //as question requirement. 6 tries the most.
-      btnClick.disabled = true;
-      btnClick.textContent = "Disabled";
-      alert("No more attempt left.")
-   }
+    if (countGuessAttempt >= 6) { //as question requirement. 6 tries the most.
+        btnClick.disabled = true;
+        btnClick.textContent = "Disabled";
+        alert("No more attempt left.")
+    }
 
-   let inputTextNum = document.getElementById("guessingNumber").value;
-   let inputTextNumConvert = parseFloat(inputTextNum);
+    let inputTextNum = document.getElementById("guessingNumber").value;
+    let inputTextNumConvert = parseFloat(inputTextNum);
 
-   if (randomNum == inputTextNumConvert) {
-      alert("You got it right in " + countGuessAttempt + " tries!");
-      btnClick.style.visibility = 'hidden';
+    if (randomNum == inputTextNumConvert) {
+        alert("You got it right in " + countGuessAttempt + " tries!");
+        btnClick.style.visibility = 'hidden';
 
-   } else if (randomNum < inputTextNumConvert) {
+    } else if (randomNum < inputTextNumConvert) {
 
-      if ((inputTextNumConvert - randomNum) <= 25) {   //if differnce between them is less than 25 than print little high
-         result.innerHTML = "Wrong! Little High";
-      }
-      else {
-         result.innerHTML = "Wrong! Too High";
-      }
+        if ((inputTextNumConvert - randomNum) <= 25) { //if differnce between them is less than 25 than print little high
+            result.innerHTML = "Wrong! Little High";
+        } else {
+            result.innerHTML = "Wrong! Too High";
+        }
 
-      countGuessAttempt++;
-      resultHistories += "<li>" + inputTextNumConvert +"</li>";
+        countGuessAttempt++;
+        resultHistories += "<li>" + inputTextNumConvert + "</li>";
+        document.getElementById("guessingNumber").value = "";
 
-   } else if (randomNum > inputTextNumConvert) {
+    } else if (randomNum > inputTextNumConvert) {
 
-      if ((randomNum - inputTextNumConvert) <= 25) {   //if differnce between them is less than 25 than print little low
-         result.innerHTML = "Wrong! Little Low";
-      }
-      else {
-         result.innerHTML = "Wrong! Too Low";
-      }
+        if ((randomNum - inputTextNumConvert) <= 25) { //if differnce between them is less than 25 than print little low
+            result.innerHTML = "Wrong! Little Low";
+        } else {
+            result.innerHTML = "Wrong! Too Low";
+        }
 
-      countGuessAttempt++;
-      resultHistories += "<li>" + inputTextNumConvert +"</li>";
-   }
+        countGuessAttempt++;
+        resultHistories += "<li>" + inputTextNumConvert + "</li>";
+        document.getElementById("guessingNumber").value = "";
+    }
 
-   showHisoriesList.innerHTML = resultHistories;
+    showHisoriesList.innerHTML = resultHistories;
 });
