@@ -1,55 +1,53 @@
-   // Store Random Number
-   const randomNum = Math.ceil(Math.random() * 100);
-   
-   // for counting attempt initialize a value
-   console.log(randomNum);
-   let countGuessAttempt = 1;
-   let btnClick = document.getElementById("submitButton");
+// Store Random Number
+const randomNum = Math.ceil(Math.random() * 100);
 
-   let result = document.getElementById("result");
+let countGuessAttempt = 1;
+let btnClick = document.getElementById("submitButton");
 
-   btnClick.addEventListener("click", function() {
+let result = document.getElementById("result");
 
-       if(countGuessAttempt >= 6){    //as question requirement. 6 tries the most.
-        document.getElementById("submitButton").style.visibility = 'hidden';
-        alert("No more attempt left.")
-       }
+let resultHistories = "<ul>";
+let showHisoriesList = document.getElementById("show-pre-inputs");
 
-       let inputTextNum = document.getElementById("guessingNumber").value;
-       let inputTextNumConvert = parseFloat(inputTextNum);
+btnClick.addEventListener("click", function () {
 
+   if (countGuessAttempt >= 6) {    //as question requirement. 6 tries the most.
+      btnClick.disabled = true;
+      btnClick.textContent = "Disabled";
+      alert("No more attempt left.")
+   }
 
-       if (randomNum == inputTextNumConvert) {
-           alert("You got it right in " + countGuessAttempt + " tries!");
-           document.getElementById("submitButton").style.visibility = 'hidden';
-           document.getElementById("equal-num").innerText = inputTextNumConvert;
+   let inputTextNum = document.getElementById("guessingNumber").value;
+   let inputTextNumConvert = parseFloat(inputTextNum);
 
-       } else if (randomNum < inputTextNumConvert) {
+   if (randomNum == inputTextNumConvert) {
+      alert("You got it right in " + countGuessAttempt + " tries!");
+      btnClick.style.visibility = 'hidden';
 
-           if ((inputTextNumConvert - randomNum) <=25){   //if differnce between them is less than 25 than print little high
-            result.innerHTML = "Wrong! Little High";
-           }
-           else{
-            result.innerHTML = "Wrong! Too High";
-           }
+   } else if (randomNum < inputTextNumConvert) {
 
-           countGuessAttempt++;
-           document.getElementById("high-num").innerText = inputTextNumConvert;
-           inputTextNum = document.getElementById("guessingNumber").value = "";
+      if ((inputTextNumConvert - randomNum) <= 25) {   //if differnce between them is less than 25 than print little high
+         result.innerHTML = "Wrong! Little High";
+      }
+      else {
+         result.innerHTML = "Wrong! Too High";
+      }
 
-       } else if (randomNum > inputTextNumConvert) {
+      countGuessAttempt++;
+      resultHistories += "<li>" + inputTextNumConvert +"</li>";
 
-        if ((randomNum - inputTextNumConvert) <=25){   //if differnce between them is less than 25 than print little low
-            result.innerHTML = "Wrong! Little Low";
-           }
-           else{
-            result.innerHTML = "Wrong! Too Low";
-           }
+   } else if (randomNum > inputTextNumConvert) {
 
-           countGuessAttempt++;
-           document.getElementById("low-num").innerText = inputTextNumConvert;
-           iinputTextNum = document.getElementById("guessingNumber").value = "";
+      if ((randomNum - inputTextNumConvert) <= 25) {   //if differnce between them is less than 25 than print little low
+         result.innerHTML = "Wrong! Little Low";
+      }
+      else {
+         result.innerHTML = "Wrong! Too Low";
+      }
 
-        }
+      countGuessAttempt++;
+      resultHistories += "<li>" + inputTextNumConvert +"</li>";
+   }
 
-   });
+   showHisoriesList.innerHTML = resultHistories;
+});
